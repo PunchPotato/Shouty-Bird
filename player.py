@@ -18,9 +18,10 @@ class Player():
         screen.blit(self.bird_up_flap_img, self.bird_up_flap_rect)
 
     def player_movement(self):
-        if self.audio_instance.quiet_threshold:
+        amplitude = audio_instance.latest_amplitude
+        if amplitude <= audio_instance.quiet_threshold:
             pass
-        elif self.audio_instance.moderate_threshold:
-            self.pos.y =+ 10
+        elif audio_instance.quiet_threshold < amplitude <= audio_instance.moderate_threshold:
+           self.pos = (self.pos[0], self.pos[1] - 1)
         else:
-            self.pos.y =+ 15
+            self.pos = (self.pos[0], self.pos[1] - 5)

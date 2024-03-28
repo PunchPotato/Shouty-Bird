@@ -10,11 +10,13 @@ class Audio():
         self.moderate_threshold = 0.04
         self.stream = None
         self.thread = None
+        self.latest_amplitude = 0
 
     def audio_callback(self, indata, frames, time, status):
         if status:
             pass
         amplitude = np.mean(indata)  
+        self.latest_amplitude = amplitude 
         self.classify_loudness(amplitude) 
 
         if not self.audio:
