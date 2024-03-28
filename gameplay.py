@@ -23,6 +23,8 @@ class FlappyBird():
     def run_game(self):
         pygame.init()
 
+        self.audio_instance.capture_audio()
+
         running = True
         while running:
             for event in pygame.event.get():
