@@ -12,6 +12,7 @@ class Player():
         self.bird_down_flap_rect = self.bird_down_flap_img.get_rect()
         self.pos = (WIDTH // 2, HEIGHT // 2)
         self.audio_instance = Audio()
+        self.gravity = 4
 
     def draw_sprite(self, screen):
         self.bird_up_flap_rect.center = self.pos
@@ -22,6 +23,8 @@ class Player():
         if amplitude <= audio_instance.quiet_threshold:
             pass
         elif audio_instance.quiet_threshold < amplitude <= audio_instance.moderate_threshold:
-           self.pos = (self.pos[0], self.pos[1] - 1)
+           self.pos = (self.pos[0], self.pos[1] - 7)
         else:
-            self.pos = (self.pos[0], self.pos[1] - 5)
+            self.pos = (self.pos[0], self.pos[1] - 10)
+
+        self.pos = (self.pos[0], self.pos[1] + self.gravity)
