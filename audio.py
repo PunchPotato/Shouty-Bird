@@ -40,11 +40,11 @@ class Audio():
 
     def classify_loudness(self, amplitude):
         if amplitude < self.quiet_threshold:
-            print("Quiet")
+            pass
         elif amplitude < self.moderate_threshold:
-            print("Moderate")
+            pass
         else:
-            print("Loud")
+            pass
 
 # Example usage:
 audio_instance = Audio()

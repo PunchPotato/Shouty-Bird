@@ -33,8 +33,8 @@ class FlappyBird():
 
             self.screen.fill('white')
             
-            self.player.player_movement()
-            self.player.draw_sprite(self.screen)
+            self.player.update()
+            self.player.draw(self.screen)
            
             pygame.display.flip()
 
