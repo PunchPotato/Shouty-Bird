@@ -4,25 +4,37 @@ from audio import audio_instance
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, WIDTH, HEIGHT) -> None:
-        pygame.sprite.Sprite.__init__
+        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self)
         self.bird_up_flap_img = pygame.image.load('assets/redbird-upflap.png')
         self.bird_mid_flap_img = pygame.image.load('assets/redbird-midflap.png')
         self.bird_down_flap_img = pygame.image.load('assets/redbird-downflap.png')
-        self.bird_up_flap_rect = self.bird_up_flap_img.get_rect()
-        self.bird_mid_flap_rect = self.bird_mid_flap_img.get_rect()
-        self.bird_down_flap_rect = self.bird_down_flap_img.get_rect()
+        
+        self.rotated_bird_up_flap = pygame.transform.rotate(self.bird_up_flap_img, 30)
+        self.rotated_bird_mid_flap = pygame.transform.rotate(self.bird_mid_flap_img, 30)
+        self.rotated_bird_down_flap = pygame.transform.rotate(self.bird_down_flap_img, 30)
+        self.rotated_sprite_sheet = [
+            (self.rotated_bird_down_flap, self.rotated_bird_down_flap.get_rect()),
+            (self.rotated_bird_mid_flap, self.rotated_bird_mid_flap.get_rect()),
+            (self.rotated_bird_up_flap, self.rotated_bird_up_flap.get_rect())
+        ]
+
+        self.rotated2_bird_up_flap = pygame.transform.rotate(self.bird_up_flap_img, -40)
+        self.rotated2_sprite_sheet = [
+            (self.rotated2_bird_up_flap, self.rotated2_bird_up_flap.get_rect())
+        ]
+
         self.pos = (WIDTH // 2, HEIGHT // 2)
         self.audio_instance = Audio()
         self.gravity = 3
-        self.sprite_sheet = [(self.bird_down_flap_img, self.bird_down_flap_rect),
-                             (self.bird_mid_flap_img, self.bird_mid_flap_rect),
-                             (self.bird_up_flap_img, self.bird_up_flap_rect)]
         self.frame_index = 0 
         self.flying = False
 
     def draw(self, screen):
-        self.bird_up_flap_rect.center = self.pos
-        screen.blit(self.sprite_sheet[self.frame_index][0], self.pos)
+        if self.flying:
+            screen.blit(self.rotated_sprite_sheet[self.frame_index][0], self.pos)
+        else:
+            screen.blit(self.rotated2_sprite_sheet[self.frame_index][0], self.pos)
 
     def update(self):
         amplitude = audio_instance.latest_amplitude
@@ -38,5 +50,8 @@ class Player(pygame.sprite.Sprite):
         self.pos = (self.pos[0], self.pos[1] + self.gravity)
 
         if self.flying:
-           self.frame_index = (self.frame_index + 1) % len(self.sprite_sheet)
-           print(self.frame_index)
+           self.frame_index = (self.frame_index + 1) % len(self.rotated_sprite_sheet)
+        else:
+            self.frame_index = (self.frame_index + 1) % len(self.rotated2_sprite_sheet)
+
+        
