@@ -7,7 +7,7 @@ class Audio():
         self.sample_rate = 44100
         self.audio = True
         self.quiet_threshold = 0.01
-        self.moderate_threshold = 0.04
+        self.moderate_threshold = 0.03
         self.stream = None
         self.thread = None
         self.latest_amplitude = 0
