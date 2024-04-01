@@ -5,7 +5,6 @@ from audio import audio_instance
 class Player(pygame.sprite.Sprite):
     def __init__(self, WIDTH, HEIGHT) -> None:
         pygame.sprite.Sprite.__init__(self)
-        pygame.sprite.Sprite.__init__(self)
         self.bird_up_flap_img = pygame.image.load('assets/redbird-upflap.png')
         self.bird_mid_flap_img = pygame.image.load('assets/redbird-midflap.png')
         self.bird_down_flap_img = pygame.image.load('assets/redbird-downflap.png')
@@ -26,7 +25,7 @@ class Player(pygame.sprite.Sprite):
 
         self.pos = (WIDTH // 2, HEIGHT // 2)
         self.audio_instance = Audio()
-        self.gravity = 3
+        self.gravity = 4
         self.frame_index = 0 
         self.flying = False
 

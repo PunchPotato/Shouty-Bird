@@ -2,6 +2,7 @@ import pygame
 import sys
 from player import Player
 from audio import Audio
+from background import Background
 
 class FlappyBird():
     def __init__(self) -> None:
@@ -10,6 +11,7 @@ class FlappyBird():
         self.caption = pygame.display.set_caption("Flappy Bird with a twist")
         self.player = Player( self.WIDTH, self.HEIGHT)
         self.audio_instance = Audio()
+        self.background_instance = Background()
 
     def background(self):
         pass
@@ -32,6 +34,8 @@ class FlappyBird():
                     running = False
 
             self.screen.fill('white')
+
+            self.background_instance.scrolling(self.screen)
             
             self.player.update()
             self.player.draw(self.screen)
