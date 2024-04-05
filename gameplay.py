@@ -33,8 +33,6 @@ class FlappyBird():
                 if event.type == pygame.QUIT:
                     running = False
 
-            self.screen.fill('white')
-
             self.background_instance.scrolling(self.screen)
             
             self.player.update()
