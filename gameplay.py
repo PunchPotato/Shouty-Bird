@@ -3,6 +3,7 @@ import sys
 from player import Player
 from audio import Audio
 from background import Background
+from tubes import Tubes
 
 class FlappyBird():
     def __init__(self) -> None:
@@ -12,6 +13,7 @@ class FlappyBird():
         self.player = Player( self.WIDTH, self.HEIGHT)
         self.audio_instance = Audio()
         self.background_instance = Background()
+        self.tubes_instance = Tubes(self.WIDTH, self.HEIGHT)
 
     def background(self):
         pass
@@ -34,6 +36,9 @@ class FlappyBird():
                     running = False
 
             self.background_instance.scrolling(self.screen)
+
+            self.tubes_instance.update()
+            self.tubes_instance.draw(self.screen)
             
             self.player.update()
             self.player.draw(self.screen)
