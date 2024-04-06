@@ -13,10 +13,8 @@ class FlappyBird():
         self.player = Player( self.WIDTH, self.HEIGHT)
         self.audio_instance = Audio()
         self.background_instance = Background()
-        self.tubes_instance = Tubes(self.WIDTH, self.HEIGHT)
-
-    def background(self):
-        pass
+        self.tubes_instance = Tubes(self.WIDTH, self.HEIGHT, 0)
+        self.tubes_instance2 = Tubes(self.WIDTH, self.HEIGHT, 200)
 
     def start_screen(self):
         pass
@@ -39,6 +37,8 @@ class FlappyBird():
 
             self.tubes_instance.update()
             self.tubes_instance.draw(self.screen)
+            self.tubes_instance2.update()
+            self.tubes_instance2.draw(self.screen)
             
             self.player.update()
             self.player.draw(self.screen)
