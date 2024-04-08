@@ -10,12 +10,18 @@ class Tubes():
         self.gap = 150
         self.tube_speed = 2
         self.x_offset = x_offset
+        self.first_reset = True
         self.reset()
 
     def reset(self):
-        self.tube_rect.x = self.screen_width + self.x_offset
+        if self.first_reset:
+            self.tube_rect.x = self.screen_width + self.x_offset
+            self.first_reset = False
+        else:
+            self.tube_rect.x = self.screen_width
         self.tube_rect.y = random.randint(-300, 0)
         self.bottom_tube_y = self.tube_rect.y + self.tube_img.get_height() + self.gap
+
 
     def update(self):
         self.tube_rect.x -= self.tube_speed

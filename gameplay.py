@@ -14,7 +14,7 @@ class FlappyBird():
         self.audio_instance = Audio()
         self.background_instance = Background()
         self.tubes_instance = Tubes(self.WIDTH, self.HEIGHT, 0)
-        self.tubes_instance2 = Tubes(self.WIDTH, self.HEIGHT, 200)
+        self.tubes_instance2 = Tubes(self.WIDTH, self.HEIGHT, 190)
 
     def start_screen(self):
         pass
