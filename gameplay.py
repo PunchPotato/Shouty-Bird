@@ -42,6 +42,7 @@ class FlappyBird():
             
             self.player.update()
             self.player.draw(self.screen)
+            self.player.collision([self.tubes_instance, self.tubes_instance2])
            
             pygame.display.flip()
 

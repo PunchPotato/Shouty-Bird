@@ -24,6 +24,7 @@ class Player(pygame.sprite.Sprite):
         ]
 
         self.pos = (WIDTH // 2, HEIGHT // 2)
+        self.rect = self.rotated_sprite_sheet[0][1]
         self.audio_instance = Audio()
         self.gravity = 4
         self.frame_index = 0 
@@ -31,9 +32,9 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, screen):
         if self.flying:
-            screen.blit(self.rotated_sprite_sheet[self.frame_index][0], self.pos)
+            self.sprite = screen.blit(self.rotated_sprite_sheet[self.frame_index][0], self.pos)
         else:
-            screen.blit(self.rotated2_sprite_sheet[self.frame_index][0], self.pos)
+            self.sprite = screen.blit(self.rotated2_sprite_sheet[self.frame_index][0], self.pos)
 
     def update(self):
         amplitude = audio_instance.latest_amplitude
@@ -53,4 +54,8 @@ class Player(pygame.sprite.Sprite):
         else:
             self.frame_index = (self.frame_index + 1) % len(self.rotated2_sprite_sheet)
 
+    def collision(self, tubes):
+       for tube in tubes:
+            if pygame.sprite.collide_rect(self, tube):
+                print("Collision detected")
         
