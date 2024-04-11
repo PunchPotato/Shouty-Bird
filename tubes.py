@@ -2,13 +2,13 @@ import pygame
 import random
 
 class Tubes():
-    def __init__(self, screen_width, screen_height, x_offset) -> None:
+    def __init__(self, screen_width, screen_height, x_offset, tube_speed) -> None:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.tube_img = pygame.image.load('assets/pipe-green.png')
         self.rect = self.tube_img.get_rect()
         self.gap = 150
-        self.tube_speed = 2
+        self.tube_speed = tube_speed
         self.x_offset = x_offset
         self.first_reset = True
         self.reset()

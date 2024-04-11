@@ -54,8 +54,12 @@ class Player(pygame.sprite.Sprite):
         else:
             self.frame_index = (self.frame_index + 1) % len(self.rotated2_sprite_sheet)
 
-    def collision(self, tubes):
+    def collision(self, tubes, tube_speed, background_speed):
        for tube in tubes:
             if pygame.sprite.collide_rect(self, tube):
-                print("Collision detected")
+                print("colided")
+                self.tube_speed = 0
+                self.background_speed = 0
+                return self.tube_speed, self.background_speed
+
         

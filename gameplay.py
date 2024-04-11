@@ -12,9 +12,11 @@ class FlappyBird():
         self.caption = pygame.display.set_caption("Flappy Bird with a twist")
         self.player = Player( self.WIDTH, self.HEIGHT)
         self.audio_instance = Audio()
-        self.background_instance = Background()
-        self.tubes_instance = Tubes(self.WIDTH, self.HEIGHT, 0)
-        self.tubes_instance2 = Tubes(self.WIDTH, self.HEIGHT, 190)
+        self.background_speed = 2
+        self.background_instance = Background(self.background_speed)
+        self.tube_speed = 2
+        self.tubes_instance = Tubes(self.WIDTH, self.HEIGHT, 0, self.tube_speed)
+        self.tubes_instance2 = Tubes(self.WIDTH, self.HEIGHT, 190, self.tube_speed)
 
     def start_screen(self):
         pass
@@ -42,7 +44,7 @@ class FlappyBird():
             
             self.player.update()
             self.player.draw(self.screen)
-            self.player.collision([self.tubes_instance, self.tubes_instance2])
+            self.player.collision([self.tubes_instance, self.tubes_instance2], self.tube_speed, self.background_speed)
            
             pygame.display.flip()
 
