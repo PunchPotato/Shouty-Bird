@@ -58,6 +58,8 @@ class Player(pygame.sprite.Sprite):
        for tube in tubes:
             if pygame.sprite.collide_rect(self, tube):
                 print("colided")
+                self.tube_speed = tube_speed
+                self.background_speed = background_speed
                 self.tube_speed = 0
                 self.background_speed = 0
                 return self.tube_speed, self.background_speed
