@@ -41,16 +41,17 @@ class Player(pygame.sprite.Sprite):
         if amplitude <= audio_instance.quiet_threshold:
             self.flying = False
         elif audio_instance.quiet_threshold < amplitude <= audio_instance.moderate_threshold:
-           self.pos = (self.pos[0], self.pos[1] - 7)
-           self.flying = True
+            self.pos = (self.pos[0], self.pos[1] - 7)
+            self.flying = True
         else:
             self.pos = (self.pos[0], self.pos[1] - 10)
             self.flying = True
 
         self.pos = (self.pos[0], self.pos[1] + self.gravity)
+        self.rect.topleft = self.pos
 
         if self.flying:
-           self.frame_index = (self.frame_index + 1) % len(self.rotated_sprite_sheet)
+            self.frame_index = (self.frame_index + 1) % len(self.rotated_sprite_sheet)
         else:
             self.frame_index = (self.frame_index + 1) % len(self.rotated2_sprite_sheet)
 

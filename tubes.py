@@ -22,12 +22,11 @@ class Tubes():
         self.rect.y = random.randint(-300, 0)
         self.bottom_tube_y = self.rect.y + self.tube_img.get_height() + self.gap
 
-
     def update(self):
         self.rect.x -= self.tube_speed
         if self.rect.right < 0:
             self.reset()
-
+            
     def draw(self, screen):
         top_tube_rect = self.rect.copy()
         top_tube_rect.height -= self.gap
@@ -37,4 +36,3 @@ class Tubes():
         bottom_tube_rect.y = self.bottom_tube_y
         screen.blit(self.tube_img, bottom_tube_rect)
         
-
