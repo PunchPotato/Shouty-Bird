@@ -1,8 +1,8 @@
 import pygame
 import random
 
-class Tubes():
-    def __init__(self, screen_width, screen_height, x_offset, tube_speed) -> None:
+class Tubes:
+    def __init__(self, screen_width, screen_height, x_offset, tube_speed):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.tube_img = pygame.image.load('assets/pipe-green.png')
@@ -11,6 +11,10 @@ class Tubes():
         self.tube_speed = tube_speed
         self.x_offset = x_offset
         self.first_reset = True
+
+        self.rect_top = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.rect.height)
+        self.rect_bottom = pygame.Rect(self.rect.x, self.rect.y + self.gap + self.rect.height, self.rect.width, self.rect.height)
+
         self.reset()
 
     def reset(self):
@@ -21,9 +25,18 @@ class Tubes():
             self.rect.x = self.screen_width
         self.rect.y = random.randint(-300, 0)
         self.bottom_tube_y = self.rect.y + self.tube_img.get_height() + self.gap
+        
+        self.rect_top.y = self.rect.y
+        self.rect_top.x = self.rect.x
+        self.rect_bottom.y = self.bottom_tube_y
+        self.rect_bottom.x = self.rect.x
 
     def update(self):
         self.rect.x -= self.tube_speed
+        
+        self.rect_top.x = self.rect.x
+        self.rect_bottom.x = self.rect.x
+        
         if self.rect.right < 0:
             self.reset()
             
@@ -35,4 +48,14 @@ class Tubes():
         bottom_tube_rect = self.rect.copy()
         bottom_tube_rect.y = self.bottom_tube_y
         screen.blit(self.tube_img, bottom_tube_rect)
+
+    def check_collision(self, player_rect):
+        if self.rect_top.colliderect(player_rect):
+            print("Collision with top tube!")
+            return True
         
+        if self.rect_bottom.colliderect(player_rect):
+            print("Collision with bottom tube!")
+            return True
+        
+        return False

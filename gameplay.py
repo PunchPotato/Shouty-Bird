@@ -41,14 +41,11 @@ class FlappyBird():
             self.tubes_instance.draw(self.screen)
             self.tubes_instance2.update()
             self.tubes_instance2.draw(self.screen)
-            
-            pygame.draw.rect(self.screen, (255, 0, 0), self.player.rect, 2) # Red rectangle around player
-            pygame.draw.rect(self.screen, (0, 255, 0), self.tubes_instance.rect, 2)  # Green rectangle around first pipe
-            pygame.draw.rect(self.screen, (255, 255, 0), self.tubes_instance2.rect, 2)
+            self.tubes_instance.check_collision(self.player)
+            self.tubes_instance2.check_collision(self.player)
 
             self.player.update()
             self.player.draw(self.screen)
-            self.player.collision([self.tubes_instance, self.tubes_instance2], self.tube_speed, self.background_speed)
            
             pygame.display.flip()
 
