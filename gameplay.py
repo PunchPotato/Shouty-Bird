@@ -42,29 +42,24 @@ class FlappyBird:
 
             self.background_instance.scrolling(self.screen)
 
-            # Update and draw the tubes
             self.tubes_instance.update()
             self.tubes_instance.draw(self.screen)
             self.tubes_instance2.update()
             self.tubes_instance2.draw(self.screen)
 
-            # Check collisions
             if self.tubes_instance.check_collision(self.player.rect, self.restart_game):
                 return
             if self.tubes_instance2.check_collision(self.player.rect, self.restart_game):
                 return
 
-            # Check if the player passes through a tube
             if self.tubes_instance.check_if_passed(self.player):
                 self.score += 1
             if self.tubes_instance2.check_if_passed(self.player):
                 self.score += 1
 
-            # Update and draw the player
             self.player.update()
             self.player.draw(self.screen)
 
-            # Display the score
             score_text = self.font.render(str(self.score), True, (0, 0, 0))
             self.screen.blit(score_text, (10, 10))
 
