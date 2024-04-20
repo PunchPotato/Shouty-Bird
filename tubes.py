@@ -11,10 +11,9 @@ class Tubes:
         self.tube_speed = tube_speed
         self.x_offset = x_offset
         self.first_reset = True
-
+        self.passed = False
         self.rect_top = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.rect.height)
         self.rect_bottom = pygame.Rect(self.rect.x, self.rect.y + self.gap + self.rect.height, self.rect.width, self.rect.height)
-
         self.reset()
 
     def reset(self):
@@ -30,6 +29,14 @@ class Tubes:
         self.rect_top.x = self.rect.x
         self.rect_bottom.y = self.bottom_tube_y
         self.rect_bottom.x = self.rect.x
+
+        self.passed = False
+
+    def check_if_passed(self, player):
+        if player.rect.x > self.rect.x + self.rect.width and not self.passed:
+            self.passed = True
+            return True
+        return False
 
     def update(self):
         self.rect.x -= self.tube_speed
@@ -49,13 +56,13 @@ class Tubes:
         bottom_tube_rect.y = self.bottom_tube_y
         screen.blit(self.tube_img, bottom_tube_rect)
 
-    def check_collision(self, player_rect):
+    def check_collision(self, player_rect, restart_game):
         if self.rect_top.colliderect(player_rect):
-            print("Collision with top tube!")
+            restart_game
             return True
         
         if self.rect_bottom.colliderect(player_rect):
-            print("Collision with bottom tube!")
+            restart_game
             return True
         
         return False
