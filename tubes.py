@@ -58,11 +58,11 @@ class Tubes:
 
     def check_collision(self, player_rect, restart_game):
         if self.rect_top.colliderect(player_rect):
-            restart_game
+            restart_game()
             return True
         
         if self.rect_bottom.colliderect(player_rect):
-            restart_game
+            restart_game()
             return True
         
         return False
