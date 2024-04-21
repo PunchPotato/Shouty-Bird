@@ -29,6 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 4
         self.frame_index = 0 
         self.flying = False
+        self.wing_audio = pygame.mixer.Sound('assets/wing.wav')
 
     def draw(self, screen):
         if self.flying:
@@ -43,9 +44,11 @@ class Player(pygame.sprite.Sprite):
         elif audio_instance.quiet_threshold < amplitude <= audio_instance.moderate_threshold:
             self.pos = (self.pos[0], self.pos[1] - 7)
             self.flying = True
+            self.wing_audio.play()
         else:
             self.pos = (self.pos[0], self.pos[1] - 10)
             self.flying = True
+            self.wing_audio.play()
 
         self.pos = (self.pos[0], self.pos[1] + self.gravity)
         self.rect.topleft = self.pos

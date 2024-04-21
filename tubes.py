@@ -15,6 +15,7 @@ class Tubes:
         self.rect_top = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.rect.height)
         self.rect_bottom = pygame.Rect(self.rect.x, self.rect.y + self.gap + self.rect.height, self.rect.width, self.rect.height)
         self.reset()
+        self.hit_audio = pygame.mixer.Sound('assets/hit.wav')
 
     def reset(self):
         if self.first_reset:
@@ -58,10 +59,12 @@ class Tubes:
 
     def check_collision(self, player_rect, restart_game):
         if self.rect_top.colliderect(player_rect):
+            self.hit_audio.play()
             restart_game()
             return True
         
         if self.rect_bottom.colliderect(player_rect):
+            self.hit_audio.play()
             restart_game()
             return True
         

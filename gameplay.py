@@ -10,6 +10,7 @@ class FlappyBird:
         pygame.init()
         pygame.font.init()
         self.initialize_game()
+        pygame.mixer.init()
 
     def initialize_game(self):
         self.WIDTH, self.HEIGHT = 320, 480
@@ -25,6 +26,7 @@ class FlappyBird:
         self.score = 0
         self.font = pygame.font.Font('assets/flappy-bird-font.ttf', 36)
         self.running = True
+        self.point_audio = pygame.mixer.Sound('assets/point.wav')
 
     def restart_game(self):
         self.initialize_game()
@@ -54,8 +56,10 @@ class FlappyBird:
 
             if self.tubes_instance.check_if_passed(self.player):
                 self.score += 1
+                self.point_audio.play()
             if self.tubes_instance2.check_if_passed(self.player):
                 self.score += 1
+                self.point_audio.play()
 
             self.player.update()
             self.player.draw(self.screen)
